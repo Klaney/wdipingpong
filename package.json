@@ -21,6 +21,7 @@
     "ejs": "^2.3.4",
     "express": "^4.13.3",
     "express-ejs-layouts": "^2.0.0",
+    "express-session": "^1.12.1",
     "request": "^2.65.0",
     "require": "^2.4.20"
   }
