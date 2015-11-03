@@ -13,7 +13,7 @@ module.exports = function(sequelize, DataTypes) {
         // associations can be defined here
       },
       authenticate: function(email, password, callback){
-      this.find({ where: {email:email } }).then(function(user){
+      this.findOne({ where: {email:email } }).then(function(user){
         if (user){
           bcrypt.compare(password, user.password, function(err, result){
             if (err){

@@ -15,8 +15,10 @@ router.route("/login")
 				if (err){
 					res.send(err);
 				} else if (user) {
+					console.log(user.name);
 					req.session.user = user.id;
-					req.flash("success", "You are logged in, spiffy person");
+					console.log(req.session.user);
+					req.flash("success", "You have now logged in");
 					res.redirect("/");
 				} else {
 					req.flash("danger", "Invalid username or password");

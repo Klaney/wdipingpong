@@ -2,30 +2,34 @@
 <html>
 <head>
 	<title>Search for Movies!</title>
-	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<!-- Compiled and minified CSS -->
-  	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/css/materialize.min.css">
+	   <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	   <!-- Compiled and minified CSS -->
+  	 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/css/materialize.min.css">
 
-  	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-  	<!-- Compiled and minified JavaScript -->
-  	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js"></script>
-  	<script type="text/javascript" src="/favorite.js"></script>
+  	 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  	 <!-- Compiled and minified JavaScript -->
+  	 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js"></script>
+  	 <script type="text/javascript" src="/favorite.js"></script>
 </head>
 <body>
+<% if(typeof alerts !== 'undefined'){ %>
+   <% for(key in alerts){ %>
+       <% alerts[key].forEach(function(thisMsg){ %>
+           <div class="alert alert-<%= key %>"><%= thisMsg %></div>
+       <% }); %>
+   <% } %>
+<% } %>
 <nav>
    	<div class="nav-wrapper">
-      <a href="/" class="brand-logo">The movie search fun place!</a>
+      <a href="/" class="brand-logo">WDI Ping Pong!</a>
       <ul class="right hide-on-med-and-down">
-        <form action="/" method="POST" role="form">
-    		<div class="input-field">
-      			<input id="q" type="search" placeholder="Search" name="q"required>
-      			<label for="search"><i class="material-icons">search</i></label>
-      			<i class="material-icons">close</i>
-    		</div>
-  		</form>
-        <li><a href="badges.html"><i class="material-icons">view_module</i></a></li>
-        <li><a href="collapsible.html"><i class="material-icons">refresh</i></a></li>
-        <li><a href="mobile.html"><i class="material-icons">more_vert</i></a></li>
+        <% if (currentUser) { %>
+          <li id="logout"><a href="/auth/logout">Logout</a></li>
+          <li><a href="/profile"><%= currentUser.name%></a></li>
+        <% } else { %>
+          <li><a href="/auth/login">Login</a></li>
+          <li><a href="/auth/signup">Signup</a></li>
+        <% } %>
       </ul>
     </div>
   </nav>
@@ -43,7 +47,7 @@
           <li><a class="grey-text text-lighten-3" href="/chatroom">Chatroom</a></li>
           <li><a class="grey-text text-lighten-3" href="/players">View Players</a></li>
           <li><a class="grey-text text-lighten-3" href="/profile">Go to your Profile</a></li>
-          <li><a class="grey-text text-lighten-3" href="/index">Go home</a></li>
+          <li><a class="grey-text text-lighten-3" href="/">Go home</a></li>
         </ul>
       </div>
     </div>
