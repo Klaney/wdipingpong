@@ -60,5 +60,11 @@ router.route("/signup")
 	}
 });
 
+router.get("/logout", function(req, res){
+	req.flash("info", "You have been logged out");
+	req.session.user = false;
+	res.redirect("/");
+});
+
 
 module.exports = router;

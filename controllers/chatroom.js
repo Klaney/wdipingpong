@@ -3,8 +3,8 @@ var router = express.Router();
 
 var db = require("../models");
 
-router.get('/chatroom', function(req, res){
-	res.render('chatroom.ejs');
+router.get('/', function(req, res){
+	res.render('chatroom');
 });
 
 module.exports = router;
