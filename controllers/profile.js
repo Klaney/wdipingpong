@@ -20,7 +20,7 @@ router.get("/createprofile", function(req, res){
 router.post("/createprofile", function(req, res){
 	db.player.findOrCreate({
 		where: {
-			lastname: req.body.lastname
+			userId: req.currentUser.id
 		},
 		defaults: {
 			firstname: req.body.firstname,
@@ -35,10 +35,11 @@ router.post("/createprofile", function(req, res){
 			req.flash("success", "You are signed up");
 			res.redirect("/");
 		} else {
-			req.flash("danger", "A player with that lastname already exists");
+			req.flash("danger", "A profile for you already exists");
 			res.redirect("/profile/createprofile");
 		}
 	}).catch(function(err){
+		console.log(err);
 		req.flash("error", "an error occurred");
 		res.redirect("/profile/createprofile");
 	});
