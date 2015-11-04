@@ -36,6 +36,10 @@ var db = require('./models');
 app.use(express.static(__dirname + '/static'));
 app.set("view engine", "ejs");
 
+//INCLUDE AND USE CLOUDINARY AND MULTER
+var cloudinary = require("cloudinary");
+var upload = multer({ dest: './uploads/' });
+
 
 app.use(function(req, res, next){
 	if (req.session.user) {

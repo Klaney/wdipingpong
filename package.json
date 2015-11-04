@@ -19,11 +19,13 @@
   "dependencies": {
     "bcrypt": "^0.8.5",
     "body-parser": "^1.14.1",
+    "cloudinary": "^1.2.5",
     "connect-flash": "^0.1.1",
     "ejs": "^2.3.4",
     "express": "^4.13.3",
     "express-ejs-layouts": "^2.0.0",
     "express-session": "^1.12.1",
+    "multer": "^1.1.0",
     "pg": "^4.4.3",
     "pg-hstore": "^2.3.2",
     "request": "^2.65.0",
