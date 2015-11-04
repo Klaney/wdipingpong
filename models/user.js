@@ -11,6 +11,7 @@ module.exports = function(sequelize, DataTypes) {
     classMethods: {
       associate: function(models) {
         // associations can be defined here
+        models.user.hasOne(models.player);
       },
       authenticate: function(email, password, callback){
       this.findOne({ where: {email:email } }).then(function(user){
