@@ -1,12 +1,17 @@
 var express = require("express");
 var router = express.Router();
 router.use(express.static(__dirname + '/static'));
+var multer = require("multer");
+var upload = multer({ dest: './uploads/' });
 
 var db = require("./../models");
 
 router.get("/", function(req, res){
+	db.player.findById(req.currentUser.id).then(function(profile){
+		var playerinfo = profile;
+	})
 	if (req.currentUser) {
-		res.render("profile/profile");
+		res.render("profile/profile", {playerinfo:playerinfo});
 	} else {
 		req.flash("Not logged in", "Please Sign in to access your profile");
 		res.redirect("/");
@@ -17,7 +22,7 @@ router.get("/createprofile", function(req, res){
 	res.render("profile/createprofile");
 })
 
-router.post("/createprofile", function(req, res){
+router.post("/createprofile", upload.single('myFile'), function(req, res){
 	db.player.findOrCreate({
 		where: {
 			userId: req.currentUser.id
