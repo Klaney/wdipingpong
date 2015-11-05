@@ -38,6 +38,7 @@ app.set("view engine", "ejs");
 
 //INCLUDE AND USE CLOUDINARY AND MULTER
 var cloudinary = require("cloudinary");
+var multer = require("multer");
 var upload = multer({ dest: './uploads/' });
 
 
