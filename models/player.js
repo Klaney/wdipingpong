@@ -7,7 +7,10 @@ module.exports = function(sequelize, DataTypes) {
     nickname: DataTypes.STRING,
     style: DataTypes.STRING,
     handgrip: DataTypes.STRING,
-    biography: DataTypes.TEXT
+    biography: DataTypes.TEXT,
+    imgkey: DataTypes.STRING,
+    wins: DataTypes.INTEGER,
+    losses: DataTypes.INTEGER
   }, {
     classMethods: {
       associate: function(models) {

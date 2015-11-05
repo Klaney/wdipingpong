@@ -3,19 +3,24 @@ var router = express.Router();
 router.use(express.static(__dirname + '/static'));
 var multer = require("multer");
 var upload = multer({ dest: './uploads/' });
+var cloudinary = require('cloudinary');
 
 var db = require("./../models");
 
 router.get("/", function(req, res){
-	db.player.findById(req.currentUser.id).then(function(profile){
-		var playerinfo = profile;
-	})
+	db.user.findById(req.currentUser.id).then(function(profile){
+		profile.getPlayer().then(function(player){
+
+		console.log(player);
+		var playerinfo = player;
 	if (req.currentUser) {
 		res.render("profile/profile", {playerinfo:playerinfo});
 	} else {
 		req.flash("Not logged in", "Please Sign in to access your profile");
 		res.redirect("/");
 	}
+		})
+	})
 })
 
 router.get("/createprofile", function(req, res){
@@ -23,6 +28,10 @@ router.get("/createprofile", function(req, res){
 })
 
 router.post("/createprofile", upload.single('myFile'), function(req, res){
+	cloudinary.uploader.upload(req.file.path, function(result) {
+    res.send(result);
+    //store public_id from the result in database
+    //redirect somewhere
 	db.player.findOrCreate({
 		where: {
 			userId: req.currentUser.id
@@ -33,7 +42,10 @@ router.post("/createprofile", upload.single('myFile'), function(req, res){
 			nickname: req.body.nickname,
 			style: req.body.style,
 			handgrip: req.body.handgrip,
-			biography: req.body.biography
+			biography: req.body.biography,
+			imgkey: result.public_id,
+			wins: 0,
+			losses: 0
 		}
 	}).spread(function(player, created){
 		if (created){
@@ -48,6 +60,7 @@ router.post("/createprofile", upload.single('myFile'), function(req, res){
 		req.flash("error", "an error occurred");
 		res.redirect("/profile/createprofile");
 	});
+  });
 });
 
 module.exports = router;

@@ -29,6 +29,15 @@ module.exports = {
       biography: {
         type: Sequelize.TEXT
       },
+      imgkey: {
+        type: Sequelize.STRING
+      },
+      wins: {
+        type: Sequelize.INTEGER
+      },
+      losses: {
+        type: Sequelize.INTEGER
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
