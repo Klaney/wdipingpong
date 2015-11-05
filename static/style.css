@@ -7,7 +7,7 @@
 #chatinput { 
 	border: 0; 
 	padding: 5px; 
-	width: 90%; 
+	width: 100%; 
 	margin-right: .5%;
 }
 #m { 
@@ -69,4 +69,7 @@ footer.page-footer {
 }
 #nav {
 	color:#ffa726;
+}
+.messagebox {
+	border: 2px solid black;
 }

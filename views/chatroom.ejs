@@ -1,12 +1,17 @@
-<h1>Where you go to Chat</h1>
+<div class="container">
+<h1>Welcome to the Thunderdome!</h1>
 
 <script type="text/javascript">
 	var socket = io();
 	socket.on('connect', function() {
  		console.log('Socket.io connection successful');
 	});
+	var currentUser = <%- JSON.stringify(currentUser) %>;
 </script>
-<ul id="messages"></ul>
-    <form action="" id="chatinput">
-      <input id="m" autocomplete="off" /><button id="chatbutton">Send</button>
-    </form>
+	<div class="messagebox">
+		<ul id="messages"></ul>
+	    <form action="" id="chatinput">
+	      <input id="m" autocomplete="off" value="" /><button id="chatbutton">Send</button>
+	    </form>
+	</div>
+</div>

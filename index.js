@@ -38,7 +38,7 @@ var cloudinary = require("cloudinary");
 var multer = require("multer");
 var upload = multer({ dest: './uploads/' });
 
-//INCLUDING MY STATIC FOLDER
+//USE MY STATIC FOLDER
 app.use(express.static(__dirname + '/static'));
 app.set("view engine", "ejs");
 
@@ -82,9 +82,15 @@ app.use("/chatroom", require("./controllers/chatroom"));
 
 io.on('connection', function(socket){
 	console.log("connected");
+	socket.on('disconnect', function(){
+    console.log('user disconnected');
+  });
+	socket.on('chat message', function(msg){
+    io.emit('chat message', msg);
+  });
 });
 
 // app.use("/input", require("./controllers/input"));
 // app.use("/players", require("./controllers/players"));
 // app.use("/getbetter", require("./controllers/getbetter"));
-app.listen(process.env.PORT || 3000);
+server.listen(process.env.PORT || 3000);
