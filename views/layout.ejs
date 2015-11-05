@@ -5,38 +5,40 @@
 	   <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	   <!-- Compiled and minified CSS -->
   	 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/css/materialize.min.css">
-     <link rel="stylesheet" href="style.css">
+     <link rel="stylesheet" href="/style.css">
 
   	 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   	 <!-- Compiled and minified JavaScript -->
   	 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js"></script>
-  	 <script type="text/javascript" src="script.js"></script>
+  	 <script type="text/javascript" src="/script.js"></script>
      <script src="/socket.io/socket.io.js"></script>
 </head>
 <body>
-<% if(typeof alerts !== 'undefined'){ %>
-   <% for(key in alerts){ %>
-       <% alerts[key].forEach(function(thisMsg){ %>
-           <div class="alert alert-<%= key %>"><%= thisMsg %></div>
-       <% }); %>
-   <% } %>
-<% } %>
-<nav>
-   	<div class="nav-wrapper">
-      <a href="/" class="brand-logo">WDI Ping Pong!</a>
-      <ul class="right hide-on-med-and-down">
-        <% if (currentUser) { %>
-          <li id="logout"><a href="/auth/logout">Logout</a></li>
-          <li><a href="/profile"><%= currentUser.name%></a></li>
-        <% } else { %>
-          <li><a href="/auth/login">Login</a></li>
-          <li><a href="/auth/signup">Signup</a></li>
-        <% } %>
-      </ul>
-    </div>
-  </nav>
- <%- body %>
- <footer class="page-footer">
+  <main>
+  <% if(typeof alerts !== 'undefined'){ %>
+     <% for(key in alerts){ %>
+         <% alerts[key].forEach(function(thisMsg){ %>
+             <div class="alert alert-<%= key %>"><%= thisMsg %></div>
+         <% }); %>
+     <% } %>
+  <% } %>
+  <nav>
+     	<div class="nav-wrapper green darken-1">
+        <a href="/" class="brand-logo">WDI Ping Pong!</a>
+        <ul class="right hide-on-med-and-down">
+          <% if (currentUser) { %>
+            <li id="logout"><a href="/auth/logout">Logout</a></li>
+            <li><a href="/profile"><%= currentUser.name%></a></li>
+          <% } else { %>
+            <li><a href="/auth/login">Login</a></li>
+            <li><a href="/auth/signup">Signup</a></li>
+          <% } %>
+        </ul>
+      </div>
+    </nav>
+   <%- body %>
+  </main>
+ <footer class="page-footer green darken-1">
   <div class="container">
     <div class="row">
       <div class="col l6 s12">
@@ -61,6 +63,5 @@
     </div>
   </div>
 </footer>
-
 </body>
 </html>

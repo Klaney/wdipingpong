@@ -1,9 +1,9 @@
-form { 
+/*form { 
 	background: #000; 
 	padding: 3px;  
 	bottom: 0; 
 	width: 100%; 
-}
+}*/
 #chatinput { 
 	border: 0; 
 	padding: 5px; 
@@ -32,4 +32,41 @@ form {
 }
 #messages li:nth-child(odd) { 
 	background: #eee; 
+}
+.cardcontainer {
+	height:250px;
+	margin:10px 35% 10px 35%;
+}
+.spacer {
+	height:40%;
+	width: 98%;
+}
+/*.playerimg {
+	max-width: 150px;
+	max-height: 150px;
+}*/
+body {
+  	background: #ffe0b2;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+
+main {
+flex: 1 0 auto;
+}
+footer.page-footer {
+    margin-top: 90px;
+}
+.card {
+	position: absolute;
+}
+.container {
+	text-align: center;
+}
+.card-content {
+	text-align: left;
+}
+#nav {
+	color:#ffa726;
 }

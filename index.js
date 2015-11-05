@@ -32,15 +32,15 @@ app.use(flash());
 //INCLUDE THE DATABASE TO BE ACCESSED ON THE PAGE
 var db = require('./models');
 
-//INCLUDING MY STATIC FOLDER
-app.use(express.static(__dirname + '/static'));
-app.set("view engine", "ejs");
 
 //INCLUDE AND USE CLOUDINARY AND MULTER
 var cloudinary = require("cloudinary");
 var multer = require("multer");
 var upload = multer({ dest: './uploads/' });
 
+//INCLUDING MY STATIC FOLDER
+app.use(express.static(__dirname + '/static'));
+app.set("view engine", "ejs");
 
 app.use(function(req, res, next){
 	if (req.session.user) {

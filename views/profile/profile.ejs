@@ -1,19 +1,26 @@
-<h1>Check out your profile!</h1>
+<div class="container">
+<h1><%= playerinfo.firstname %>s profile!</h1>
 <%if (playerinfo){ %>
-<div class="card">
-    <div class="card-image waves-effect waves-block waves-light">
-      <img class="activator" src="uploads/headshot.jpg">
-    </div>
-    <div class="card-content">
-      <span class="card-title activator grey-text text-darken-4"><strong><%=playerinfo.firstname%> <%=playerinfo.lastname%></strong><i class="material-icons right">more_vert</i></span>
-      <p><a href="#">This is a link</a></p>
-    </div>
-    <div class="card-reveal">
-      <span class="card-title grey-text text-darken-4">Biography<i class="material-icons right">close</i></span>
-      <p>Here is some more information about this product that is only revealed once clicked on.</p>
-    </div>
-</div>
-	<p><%=playerinfo.firstname%></p>
+	<div class="cardcontainer">
+		<div class="card">
+		    <div class="card-image waves-effect waves-block waves-light">
+		      <img  class="activator playerimg" src="<%= imgUrl %>">
+		    </div>
+		    <div class="card-content">
+		      <span class="card-title activator grey-text text-darken-4"><strong><%=playerinfo.firstname%> <%=playerinfo.lastname%></strong><i class="material-icons right">more_vert</i></span>
+		      <strong><p><%=playerinfo.nickname%></p></strong>
+		      <p><%=playerinfo.style%></p>
+		      <p><%=playerinfo.grip%></p>
+		    </div>
+		    <div class="card-reveal">
+		      <span class="card-title grey-text text-darken-4">Biography<i class="material-icons right">close</i></span>
+		      <p><%= playerinfo.biography%></p>
+		    </div>
+		</div>
+	</div>
 <%} else { %>
 <a href="/profile/createprofile">Make your profile</a>
 <% }%>
+</div>
+
+<br>

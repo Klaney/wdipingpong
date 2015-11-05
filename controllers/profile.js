@@ -10,15 +10,19 @@ var db = require("./../models");
 router.get("/", function(req, res){
 	db.user.findById(req.currentUser.id).then(function(profile){
 		profile.getPlayer().then(function(player){
-
-		console.log(player);
-		var playerinfo = player;
-	if (req.currentUser) {
-		res.render("profile/profile", {playerinfo:playerinfo});
-	} else {
-		req.flash("Not logged in", "Please Sign in to access your profile");
-		res.redirect("/");
-	}
+			var imgUrl = cloudinary.url(player.imgkey, { 
+				width: 200, 
+				height: 200, 
+				crop: 'thumb' 
+				});
+			console.log(player);
+			var playerinfo = player;
+			if (req.currentUser) {
+				res.render("profile/profile", {playerinfo:playerinfo, imgUrl:imgUrl});
+			} else {
+				req.flash("Not logged in", "Please Sign in to access your profile");
+				res.redirect("/");
+			}
 		})
 	})
 })
@@ -29,7 +33,6 @@ router.get("/createprofile", function(req, res){
 
 router.post("/createprofile", upload.single('myFile'), function(req, res){
 	cloudinary.uploader.upload(req.file.path, function(result) {
-    res.send(result);
     //store public_id from the result in database
     //redirect somewhere
 	db.player.findOrCreate({
