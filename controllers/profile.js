@@ -5,25 +5,29 @@ var multer = require("multer");
 var upload = multer({ dest: './uploads/' });
 var cloudinary = require('cloudinary');
 
+cloudinary.config({cloud_name: 'dlcex3ijj', api_key: 118578171113571, api_secret: '7lOOA50ZYnUnYaYb7B7bduQXsts'});
+
 var db = require("./../models");
 
 router.get("/", function(req, res){
+	var imgUrl;
+	var playerinfo;
+	if(!req.currentUser){
+		req.flash("Not logged in", "Please Sign in to access your profile");
+		res.redirect("/");
+	}
 	db.user.findById(req.currentUser.id).then(function(profile){
-		profile.getPlayer().then(function(player){
-			var imgUrl = cloudinary.url(player.imgkey, { 
-				width: 200, 
-				height: 200, 
-				crop: 'thumb' 
-				});
-			console.log(player);
-			var playerinfo = player;
-			if (req.currentUser) {
+			profile.getPlayer().then(function(player){
+				if(profile.imgkey){
+					 	imgUrl = cloudinary.url(player.imgkey, { 
+						width: 200, 
+						height: 200, 
+						crop: 'thumb' 
+						});
+				}
+				playerinfo = player;				
 				res.render("profile/profile", {playerinfo:playerinfo, imgUrl:imgUrl});
-			} else {
-				req.flash("Not logged in", "Please Sign in to access your profile");
-				res.redirect("/");
-			}
-		})
+			})
 	})
 })
 
