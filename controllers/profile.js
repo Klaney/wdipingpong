@@ -10,8 +10,8 @@ cloudinary.config({cloud_name: 'dlcex3ijj', api_key: 118578171113571, api_secret
 var db = require("./../models");
 
 router.get("/", function(req, res){
-	var imgUrl;
-	var playerinfo;
+	// var imgUrl;
+	// var playerinfo;
 	if(!req.currentUser){
 		req.flash("Not logged in", "Please Sign in to access your profile");
 		res.redirect("/");
@@ -19,13 +19,13 @@ router.get("/", function(req, res){
 	db.user.findById(req.currentUser.id).then(function(profile){
 			profile.getPlayer().then(function(player){
 				if(profile.imgkey){
-					 	imgUrl = cloudinary.url(player.imgkey, { 
+					 	var imgUrl = cloudinary.url(player.imgkey, { 
 						width: 200, 
 						height: 200, 
 						crop: 'thumb' 
 						});
 				}
-				playerinfo = player;				
+				var playerinfo = player;				
 				res.render("profile/profile", {playerinfo:playerinfo, imgUrl:imgUrl});
 			})
 	})

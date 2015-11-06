@@ -46,6 +46,7 @@
 	max-height: 150px;
 }*/
 body {
+	font-family: "Carrois Gothic", helvetica;
   	background: #ffe0b2;
     display: flex;
     min-height: 100vh;
