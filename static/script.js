@@ -1,14 +1,16 @@
 $(document).ready(function(){
 	$('#chatinput').submit(function(){
-	    socket.emit('server message', $('#m').val());
+	    socket.emit('message', {content: $('#m').val(), name: currentUser.name});
 	    $('#m').val('');
 	    return false;
 	});
-	socket.on('client message', function(newMsg){
-		console.log(newMsg);
-		$('#messages').append($('<li>').text(newMsg.username+":"+newMsg.content));
-
-	})
+	socket.on('message', function(data){
+		console.log(data);
+		$('#messages').append($('<li>').text(data.name + ' - ' + data.content));
+	});
+	// socket.on('client message', function(name){
+	// 	console.log(name);
+	// })
  });
 
 // var tweet = {user: "nodesource", text: "Hello, world!"};

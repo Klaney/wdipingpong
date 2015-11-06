@@ -70,9 +70,18 @@ app.use(function(req, res, next){
 	next();
 });
 
+function processBoth(io){
+	return function(req, res){
+		var currentUser = req.currentUser.name;
+		io.sockets.emit('client message', currentUser);
+	};
+}
+
 app.get("/", function(req, res){
 	res.render("index");
 });
+
+app.get('/morechat', processBoth(io));
 
 // io.on('connection', function(socket){
 //   console.log( currentUser.name + ' connected');
@@ -87,16 +96,10 @@ io.on('connection', function(socket){
 	socket.on('disconnect', function(){
     	console.log('user disconnected');
   	});
-	socket.on('server message', function(data) {
-		console.log(currentUser);
-	    //Create message
-	    var newMsg = 
-	    {
-	      username: currentUser.name,
-	      content: data
-	  	};
-	  	socket.emit('client message', newMsg);
-	});
+  	socket.on('message', function(data){
+  		console.log('message received');
+  		io.emit('message', data);
+  	})
 });
 
 // app.use("/input", require("./controllers/input"));
