@@ -8,7 +8,12 @@ router.use(express.static(__dirname + '/static'));
 
 var db = require("../models");
 router.get('/', function(req, res){
-	res.render('chatroom');
+	if (req.currentUser){
+		res.render('chatroom');	
+	} else {
+		req.flash("Not logged in", "Please Sign in to access the Thunderdome!");
+		res.redirect("/");
+	}
 });
 
 
