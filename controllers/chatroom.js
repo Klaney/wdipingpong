@@ -8,8 +8,7 @@ router.use(express.static(__dirname + '/static'));
 
 var db = require("../models");
 router.get('/', function(req, res){
-	var currentUser = req.currentUser;
-	res.render('chatroom', {currentUser:currentUser});
+	res.render('chatroom');
 });
 
 

@@ -42,11 +42,15 @@ var upload = multer({ dest: './uploads/' });
 app.use(express.static(__dirname + '/static'));
 app.set("view engine", "ejs");
 
+//CREATE GLOBAL CURRENT USER VARIABLE FOR SOCKET TO USE
+var currentUser;
+
 app.use(function(req, res, next){
 	if (req.session.user) {
 		db.user.findById(req.session.user).then(function(user){
 			if (user){
 				req.currentUser = user;
+				currentUser = req.currentUser;
 				next();
 			} else {
 				req.currentUser = false;
@@ -78,16 +82,21 @@ app.use("/auth", require("./controllers/auth"));
 app.use("/profile", require("./controllers/profile"));
 app.use("/chatroom", require("./controllers/chatroom"));
 
-//var controller = require('./controllers/chatroom.js');
-
 io.on('connection', function(socket){
 	console.log("connected");
 	socket.on('disconnect', function(){
-    console.log('user disconnected');
-  });
-	socket.on('chat message', function(msg){
-    io.emit('chat message', msg);
-  });
+    	console.log('user disconnected');
+  	});
+	socket.on('server message', function(data) {
+		console.log(currentUser);
+	    //Create message
+	    var newMsg = 
+	    {
+	      username: currentUser.name,
+	      content: data
+	  	};
+	  	socket.emit('client message', newMsg);
+	});
 });
 
 // app.use("/input", require("./controllers/input"));
